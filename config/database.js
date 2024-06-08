@@ -1,8 +1,9 @@
+require('dotenv').config();
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize(process.env.POSTGRES_URI, {
+const sequelize = new Sequelize(process.env.POSTGRES_URL, {
   dialect: 'postgres',
-  logging: false, // Para desactivar el registro SQL en la consola
+  logging: false,
 });
 
 const connectDB = async () => {

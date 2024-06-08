@@ -11,7 +11,6 @@ connectDB();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Configurar Nodemailer
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -23,10 +22,8 @@ const transporter = nodemailer.createTransport({
 app.post('/api/form', async (req, res) => {
   const { name, email } = req.body;
   try {
-    // Guardar los datos en PostgreSQL
     const newForm = await Form.create({ name, email });
 
-    // Configurar el correo electrónico
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_RECIPIENT,
@@ -34,7 +31,6 @@ app.post('/api/form', async (req, res) => {
       text: `Se ha recibido un nuevo registro.\n\nNombre: ${name}\nCorreo electrónico: ${email}`,
     };
 
-    // Enviar el correo electrónico
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         console.error('Error al enviar el correo:', error);

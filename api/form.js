@@ -24,7 +24,7 @@ app.post('/api/form', async (req, res) => {
   const { name, email } = req.body;
   try {
     // Guardar los datos en PostgreSQL
-    const newForm = await Form.create({ name:"fran", email:"franck.021097@gmail.com" });
+    const newForm = await Form.create({ name, email });
 
     // Configurar el correo electrónico
     const mailOptions = {
